@@ -123,46 +123,9 @@ class LLMClient:
                     if potential_name and potential_name[0].isupper():
                         company_name = potential_name
 
-            if "research" in prompt.lower():
-                return f"""# Research Findings for {company_name}
-
-## Financial Analysis
-- Annual Revenue: $50M with 20% year-over-year growth
-- Profit Margin: 15% (industry average: 12%)
-- Cash Flow: Positive with $8M in reserves
-- Debt-to-Equity Ratio: 0.3 (healthy leverage)
-
-## Legal Status
-- No pending litigation or regulatory investigations
-- Regulatory compliance: Good standing across all jurisdictions
-- Intellectual Property: 12 patents, 8 pending applications
-- Corporate structure: Delaware C-Corp with clean cap table
-
-## Market Position
-- Market share: 8% in target segment
-- Main competitors: 3 major players with 40% combined share
-- Growth potential: High due to emerging market expansion
-- Customer retention rate: 92% (excellent)"""
-
-            elif "write" in prompt.lower() or "report" in prompt.lower():
-                # Check if this is due diligence or recruiting
-                if "due diligence" in prompt.lower() or "diligence" in prompt.lower():
-                    return f"""# Due Diligence Report: {company_name}
-
-## Financial Analysis
-
-The company demonstrates strong financial performance with consistent revenue growth of 20% year-over-year, reaching $50M in annual revenue. The profit margin of 15% exceeds the industry average of 12%, indicating efficient operations and competitive positioning. Cash flow remains positive with $8M in reserves, providing adequate runway for operations and strategic initiatives. The debt-to-equity ratio of 0.3 reflects conservative financial management with healthy leverage levels.
-
-## Legal Review
-
-Our legal due diligence revealed no material concerns. There are no pending litigation matters or regulatory investigations that could impact the transaction. The company maintains regulatory compliance across all operating jurisdictions. The intellectual property portfolio includes 12 granted patents and 8 pending applications, providing competitive protection. The corporate structure is clean with a Delaware C-Corp entity and well-documented cap table.
-
-## Market Position
-
-{company_name} holds an 8% market share in its target segment, competing against three major players who collectively control 40% of the market. The company's customer retention rate of 92% demonstrates strong product-market fit and customer satisfaction. Growth potential is substantial, particularly in emerging markets where the company has established preliminary partnerships. The competitive positioning is favorable for continued expansion and market share gains."""
-
-                elif "recruit" in prompt.lower() or "sourcing" in prompt.lower() or "boolean" in prompt.lower():
-                    return """# Sourcing Strategy and Interview Materials
+            # Check for recruiting/sourcing FIRST (before research, since prompts may contain "research" as a word)
+            if "sourcing" in prompt.lower() or "recruit" in prompt.lower() or ("boolean" in prompt.lower() and "interview" in prompt.lower()):
+                return """# Sourcing Strategy and Interview Materials
 
 ## Boolean Search String
 
@@ -212,6 +175,44 @@ Our legal due diligence revealed no material concerns. There are no pending liti
 - Communication skills and ability to explain complex concepts
 - Cultural fit and alignment with team values
 - Leadership potential and mentorship capability"""
+
+            elif "research" in prompt.lower():
+                return f"""# Research Findings for {company_name}
+
+## Financial Analysis
+- Annual Revenue: $50M with 20% year-over-year growth
+- Profit Margin: 15% (industry average: 12%)
+- Cash Flow: Positive with $8M in reserves
+- Debt-to-Equity Ratio: 0.3 (healthy leverage)
+
+## Legal Status
+- No pending litigation or regulatory investigations
+- Regulatory compliance: Good standing across all jurisdictions
+- Intellectual Property: 12 patents, 8 pending applications
+- Corporate structure: Delaware C-Corp with clean cap table
+
+## Market Position
+- Market share: 8% in target segment
+- Main competitors: 3 major players with 40% combined share
+- Growth potential: High due to emerging market expansion
+- Customer retention rate: 92% (excellent)"""
+
+            elif "write" in prompt.lower() or "report" in prompt.lower():
+                # Check if this is due diligence
+                if "due diligence" in prompt.lower() or "diligence" in prompt.lower():
+                    return f"""# Due Diligence Report: {company_name}
+
+## Financial Analysis
+
+The company demonstrates strong financial performance with consistent revenue growth of 20% year-over-year, reaching $50M in annual revenue. The profit margin of 15% exceeds the industry average of 12%, indicating efficient operations and competitive positioning. Cash flow remains positive with $8M in reserves, providing adequate runway for operations and strategic initiatives. The debt-to-equity ratio of 0.3 reflects conservative financial management with healthy leverage levels.
+
+## Legal Review
+
+Our legal due diligence revealed no material concerns. There are no pending litigation matters or regulatory investigations that could impact the transaction. The company maintains regulatory compliance across all operating jurisdictions. The intellectual property portfolio includes 12 granted patents and 8 pending applications, providing competitive protection. The corporate structure is clean with a Delaware C-Corp entity and well-documented cap table.
+
+## Market Position
+
+{company_name} holds an 8% market share in its target segment, competing against three major players who collectively control 40% of the market. The company's customer retention rate of 92% demonstrates strong product-market fit and customer satisfaction. Growth potential is substantial, particularly in emerging markets where the company has established preliminary partnerships. The competitive positioning is favorable for continued expansion and market share gains."""
                 else:
                     return """# Professional Analysis Report
 

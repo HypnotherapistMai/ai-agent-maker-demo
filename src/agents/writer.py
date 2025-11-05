@@ -109,9 +109,9 @@ Be concise yet comprehensive. Use clear markdown formatting."""
         except Exception as e:
             logger.error(f"Writing error: {e}")
             # Use mock fallback
-            if "due_diligence" in workflow_name.lower():
+            if "due_diligence" in workflow_name.lower() or "diligence" in workflow_name.lower():
                 draft = self.mock_provider.get_mock_report(input_data.get("company_name", "ACME Corp"))
-            elif "recruiting" in workflow_name.lower():
+            elif "recruiting" in workflow_name.lower() or "jd" in workflow_name.lower() or "sourcing" in workflow_name.lower():
                 draft = self.mock_provider.get_mock_recruiting_output()
             else:
                 draft = "Mock output: Professional analysis and recommendations based on research findings."
