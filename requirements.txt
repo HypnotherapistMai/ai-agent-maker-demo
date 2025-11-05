@@ -1,0 +1,30 @@
+# Core
+langchain>=0.1.0
+langchain-openai>=0.0.5
+langgraph>=0.0.20
+openai>=1.10.0
+
+# API
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.5.0
+httpx>=0.26.0
+
+# UI
+streamlit>=1.30.0
+
+# Storage
+sqlalchemy>=2.0.0
+python-dotenv>=1.0.0
+
+# Testing
+pytest>=8.0.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.23.0
+
+# Linting
+ruff>=0.1.0
+mypy>=1.8.0
+
+# Optional (ADK)
+google-adk

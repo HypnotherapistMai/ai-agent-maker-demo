@@ -1,0 +1,28 @@
+{
+  "mock_analysis": {
+    "technical_skills": [
+      "Python (5+ years)",
+      "AWS/GCP/Azure",
+      "TensorFlow or PyTorch",
+      "ML infrastructure"
+    ],
+    "soft_skills": [
+      "Communication",
+      "Leadership",
+      "Mentoring"
+    ],
+    "experience_level": "Senior (5+ years)",
+    "key_qualifications": [
+      "Production ML systems",
+      "Cloud platforms",
+      "Team leadership"
+    ]
+  },
+  "expected_boolean": "(Python OR \"machine learning\" OR ML) AND (\"senior engineer\" OR \"tech lead\") AND (AWS OR GCP OR Azure) AND (TensorFlow OR PyTorch)",
+  "expected_interview_sections": [
+    "Technical Assessment",
+    "System Design",
+    "Behavioral Interview",
+    "Leadership Discussion"
+  ]
+}

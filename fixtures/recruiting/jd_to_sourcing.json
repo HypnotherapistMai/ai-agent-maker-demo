@@ -1,0 +1,42 @@
+{
+  "workflow_name": "jd_to_sourcing_strategy",
+  "description": "Transform job description into sourcing strategy and interview materials",
+  "input": {
+    "job_description": "Senior Software Engineer - ML Platform\n\nWe're seeking an experienced engineer to build our ML infrastructure. Requirements:\n- 5+ years Python development\n- Experience with AWS, GCP, or Azure\n- Machine learning frameworks (TensorFlow, PyTorch)\n- Strong communication and leadership skills\n- Experience mentoring junior engineers",
+    "job_title": "Senior Software Engineer - ML",
+    "location": "San Francisco / Remote"
+  },
+  "expected_output": {
+    "format": "sourcing_package",
+    "includes": ["boolean_search", "interview_outline"],
+    "components": ["technical_assessment", "behavioral_questions"]
+  },
+  "steps": [
+    {
+      "name": "analyze_jd",
+      "agent_role": "researcher",
+      "input_keys": [],
+      "output_key": "jd_analysis",
+      "prompt_template": "Analyze job description and extract key requirements",
+      "validation_rules": {}
+    },
+    {
+      "name": "create_strategy",
+      "agent_role": "writer",
+      "input_keys": ["jd_analysis"],
+      "output_key": "sourcing_strategy",
+      "prompt_template": "Create boolean search string and interview outline",
+      "validation_rules": {
+        "must_include": ["boolean", "interview"]
+      }
+    },
+    {
+      "name": "validate_output",
+      "agent_role": "qa",
+      "input_keys": ["sourcing_strategy"],
+      "output_key": "final_output",
+      "prompt_template": "Validate sourcing strategy completeness",
+      "validation_rules": {}
+    }
+  ]
+}

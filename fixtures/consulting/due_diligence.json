@@ -1,0 +1,45 @@
+{
+  "workflow_name": "customer_due_diligence",
+  "description": "Comprehensive due diligence analysis for M&A evaluation",
+  "input": {
+    "company_name": "TechStart Inc",
+    "industry": "SaaS",
+    "deal_size": "$50M"
+  },
+  "expected_output": {
+    "format": "markdown_report",
+    "sections": ["financial", "legal", "market"],
+    "min_length": 300
+  },
+  "steps": [
+    {
+      "name": "research_company",
+      "agent_role": "researcher",
+      "input_keys": [],
+      "output_key": "research_findings",
+      "prompt_template": "Research TechStart Inc for due diligence",
+      "validation_rules": {}
+    },
+    {
+      "name": "write_report",
+      "agent_role": "writer",
+      "input_keys": ["research_findings"],
+      "output_key": "report_draft",
+      "prompt_template": "Write comprehensive due diligence report with 3 sections",
+      "validation_rules": {
+        "min_sections": 3,
+        "min_length": 300
+      }
+    },
+    {
+      "name": "qa_validation",
+      "agent_role": "qa",
+      "input_keys": ["report_draft"],
+      "output_key": "final_report",
+      "prompt_template": "Validate report completeness and quality",
+      "validation_rules": {
+        "must_contain": ["financial", "legal", "market"]
+      }
+    }
+  ]
+}

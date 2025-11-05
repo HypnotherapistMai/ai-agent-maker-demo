@@ -1,0 +1,29 @@
+{
+  "mock_research": {
+    "company_name": "TechStart Inc",
+    "financial": {
+      "revenue": "$45M ARR",
+      "growth_rate": "120% YoY",
+      "burn_rate": "$2M/month",
+      "runway": "18 months",
+      "gross_margin": "75%"
+    },
+    "legal": {
+      "incorporation": "Delaware C-Corp",
+      "pending_litigation": "None",
+      "ip_portfolio": "15 patents pending",
+      "regulatory_compliance": "SOC 2 Type II, GDPR compliant"
+    },
+    "market": {
+      "tam": "$15B",
+      "market_share": "2.5%",
+      "competitors": ["CompetitorA", "CompetitorB", "CompetitorC"],
+      "growth_potential": "High - expanding to Europe"
+    }
+  },
+  "expected_report_sections": [
+    "Financial Analysis",
+    "Legal Review",
+    "Market Position"
+  ]
+}
