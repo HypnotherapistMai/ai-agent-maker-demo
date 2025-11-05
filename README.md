@@ -312,8 +312,11 @@ pytest tests/golden/            # Golden tests (scenario validation)
 ## 🎯 Key Features Demonstrated
 
 ✅ **Blueprint Interpretation**: JSON + Natural Language
+
 ✅ **Dynamic Agent Generation**: Workflow → LangGraph nodes
+
 ✅ **Specialized Prompts**: Role-specific system prompts
+
 ✅ **Agent Coordination**: StateGraph message passing
 ✅ **Meta-Learning**: Historical failures → Prompt adjustments
 ✅ **Validation & Retry**: QA agent with retry loops
