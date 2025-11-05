@@ -1,0 +1,124 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.5, pytest-8.4.2, pluggy-1.6.0 -- /Users/mai/ai-agent-maker/ai-agent-maker-demo/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/mai/ai-agent-maker/ai-agent-maker-demo
+plugins: langsmith-0.4.41, asyncio-1.2.0, anyio-4.11.0, cov-7.0.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 79 items
+
+tests/golden/test_due_diligence.py::test_due_diligence_complete_flow PASSED [  1%]
+tests/golden/test_due_diligence.py::test_due_diligence_output_format PASSED [  2%]
+tests/golden/test_due_diligence.py::test_due_diligence_company_name PASSED [  3%]
+tests/golden/test_due_diligence.py::test_due_diligence_retry_behavior PASSED [  5%]
+tests/golden/test_due_diligence.py::test_due_diligence_metadata PASSED   [  6%]
+tests/golden/test_due_diligence.py::test_due_diligence_agent_coordination PASSED [  7%]
+tests/golden/test_recruiting.py::test_recruiting_complete_flow PASSED    [  8%]
+tests/golden/test_recruiting.py::test_recruiting_boolean_search PASSED   [ 10%]
+tests/golden/test_recruiting.py::test_recruiting_interview_outline PASSED [ 11%]
+tests/golden/test_recruiting.py::test_recruiting_jd_extraction PASSED    [ 12%]
+tests/golden/test_recruiting.py::test_recruiting_output_structure PASSED [ 13%]
+tests/golden/test_recruiting.py::test_recruiting_validation PASSED       [ 15%]
+tests/golden/test_recruiting.py::test_recruiting_metadata PASSED         [ 16%]
+tests/golden/test_recruiting.py::test_recruiting_agent_outputs PASSED    [ 17%]
+tests/golden/test_recruiting.py::test_recruiting_error_recovery PASSED   [ 18%]
+tests/integration/test_api.py::test_root_endpoint PASSED                 [ 20%]
+tests/integration/test_api.py::test_health_endpoint PASSED               [ 21%]
+tests/integration/test_api.py::test_run_workflow_due_diligence PASSED    [ 22%]
+tests/integration/test_api.py::test_run_workflow_recruiting PASSED       [ 24%]
+tests/integration/test_api.py::test_run_workflow_invalid_blueprint PASSED [ 25%]
+tests/integration/test_api.py::test_get_stats_new_workflow PASSED        [ 26%]
+tests/integration/test_api.py::test_get_learning_context PASSED          [ 27%]
+tests/integration/test_api.py::test_clear_history PASSED                 [ 29%]
+tests/integration/test_api.py::test_api_cors_headers PASSED              [ 30%]
+tests/integration/test_api.py::test_openapi_docs_available PASSED        [ 31%]
+tests/integration/test_api.py::test_run_workflow_end_to_end PASSED       [ 32%]
+tests/integration/test_graph_execution.py::test_build_graph PASSED       [ 34%]
+tests/integration/test_graph_execution.py::test_execute_workflow_due_diligence PASSED [ 35%]
+tests/integration/test_graph_execution.py::test_execute_workflow_recruiting PASSED [ 36%]
+tests/integration/test_graph_execution.py::test_workflow_retry_logic PASSED [ 37%]
+tests/integration/test_graph_execution.py::test_workflow_state_tracking PASSED [ 39%]
+tests/integration/test_graph_execution.py::test_workflow_error_handling PASSED [ 40%]
+tests/integration/test_graph_execution.py::test_memory_persistence PASSED [ 41%]
+tests/integration/test_graph_execution.py::test_concurrent_workflows PASSED [ 43%]
+tests/unit/test_adk.py::test_adk_availability PASSED                     [ 44%]
+tests/unit/test_adk.py::test_mock_research_function PASSED               [ 45%]
+tests/unit/test_adk.py::test_adk_manager_initialization PASSED           [ 46%]
+tests/unit/test_adk.py::test_run_equivalent_flow PASSED                  [ 48%]
+tests/unit/test_adk.py::test_get_status PASSED                           [ 49%]
+tests/unit/test_adk.py::test_mock_mode_fallback PASSED                   [ 50%]
+tests/unit/test_adk.py::test_adk_real_integration PASSED                 [ 51%]
+tests/unit/test_adk.py::test_error_handling PASSED                       [ 53%]
+tests/unit/test_agents.py::test_manager_agent_initialization PASSED      [ 54%]
+tests/unit/test_agents.py::test_manager_process PASSED                   [ 55%]
+tests/unit/test_agents.py::test_researcher_agent_initialization PASSED   [ 56%]
+tests/unit/test_agents.py::test_researcher_process PASSED                [ 58%]
+tests/unit/test_agents.py::test_writer_agent_initialization PASSED       [ 59%]
+tests/unit/test_agents.py::test_writer_process PASSED                    [ 60%]
+tests/unit/test_agents.py::test_writer_process_with_feedback PASSED      [ 62%]
+tests/unit/test_agents.py::test_qa_agent_initialization PASSED           [ 63%]
+tests/unit/test_agents.py::test_qa_process_pass PASSED                   [ 64%]
+tests/unit/test_agents.py::test_qa_process_fail PASSED                   [ 65%]
+tests/unit/test_agents.py::test_agent_error_handling PASSED              [ 67%]
+tests/unit/test_blueprint_parser.py::test_parse_json_blueprint PASSED    [ 68%]
+tests/unit/test_blueprint_parser.py::test_parse_minimal_blueprint PASSED [ 69%]
+tests/unit/test_blueprint_parser.py::test_parse_invalid_json PASSED      [ 70%]
+tests/unit/test_blueprint_parser.py::test_parse_missing_workflow_name PASSED [ 72%]
+tests/unit/test_blueprint_parser.py::test_generate_due_diligence_steps PASSED [ 73%]
+tests/unit/test_blueprint_parser.py::test_generate_recruiting_steps PASSED [ 74%]
+tests/unit/test_blueprint_parser.py::test_parse_with_scenario_hint PASSED [ 75%]
+tests/unit/test_memory.py::test_memory_initialization PASSED             [ 77%]
+tests/unit/test_memory.py::test_record_successful_execution PASSED       [ 78%]
+tests/unit/test_memory.py::test_record_failed_execution PASSED           [ 79%]
+tests/unit/test_memory.py::test_get_learning_context_no_history PASSED   [ 81%]
+tests/unit/test_memory.py::test_get_learning_context_with_failures PASSED [ 82%]
+tests/unit/test_memory.py::test_get_execution_stats_multiple_executions PASSED [ 83%]
+tests/unit/test_memory.py::test_clear_history_specific_workflow PASSED   [ 84%]
+tests/unit/test_memory.py::test_clear_all_history PASSED                 [ 86%]
+tests/unit/test_validators.py::test_validate_min_length_pass PASSED      [ 87%]
+tests/unit/test_validators.py::test_validate_min_length_fail PASSED      [ 88%]
+tests/unit/test_validators.py::test_validate_min_sections_pass PASSED    [ 89%]
+tests/unit/test_validators.py::test_validate_min_sections_fail PASSED    [ 91%]
+tests/unit/test_validators.py::test_validate_must_contain_pass PASSED    [ 92%]
+tests/unit/test_validators.py::test_validate_must_contain_fail PASSED    [ 93%]
+tests/unit/test_validators.py::test_validate_multiple_rules PASSED       [ 94%]
+tests/unit/test_validators.py::test_validate_workflow_output_due_diligence PASSED [ 96%]
+tests/unit/test_validators.py::test_validate_workflow_output_recruiting PASSED [ 97%]
+tests/unit/test_validators.py::test_count_sections PASSED                [ 98%]
+tests/unit/test_validators.py::test_is_markdown PASSED                   [100%]
+
+=============================== warnings summary ===============================
+src/core/schemas.py:37
+  /Users/mai/ai-agent-maker/ai-agent-maker-demo/src/core/schemas.py:37: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    @validator("steps")
+
+api/models.py:6
+  /Users/mai/ai-agent-maker/ai-agent-maker-demo/api/models.py:6: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class RunRequest(BaseModel):
+
+venv/lib/python3.13/site-packages/pydantic/_internal/_config.py:383
+  /Users/mai/ai-agent-maker/ai-agent-maker-demo/venv/lib/python3.13/site-packages/pydantic/_internal/_config.py:383: UserWarning: Valid config keys have changed in V2:
+  * 'schema_extra' has been renamed to 'json_schema_extra'
+    warnings.warn(message, UserWarning)
+
+api/models.py:20
+  /Users/mai/ai-agent-maker/ai-agent-maker-demo/api/models.py:20: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class RunResponse(BaseModel):
+
+venv/lib/python3.13/site-packages/google/genai/types.py:9952
+  /Users/mai/ai-agent-maker/ai-agent-maker-demo/venv/lib/python3.13/site-packages/google/genai/types.py:9952: PydanticDeprecatedSince212: Using `@model_validator` with mode='after' on a classmethod is deprecated. Instead, use an instance method. See the documentation at https://docs.pydantic.dev/2.12/concepts/validators/#model-after-validator. Deprecated in Pydantic V2.12 to be removed in V3.0.
+    @model_validator(mode='after')  # type: ignore[arg-type]
+
+venv/lib/python3.13/site-packages/google/cloud/aiplatform/models.py:52
+  /Users/mai/ai-agent-maker/ai-agent-maker-demo/venv/lib/python3.13/site-packages/google/cloud/aiplatform/models.py:52: FutureWarning: Support for google-cloud-storage < 3.0.0 will be removed in a future version of google-cloud-aiplatform. Please upgrade to google-cloud-storage >= 3.0.0.
+    from google.cloud.aiplatform.utils import gcs_utils
+
+tests/golden/test_due_diligence.py: 12 warnings
+tests/golden/test_recruiting.py: 18 warnings
+tests/integration/test_api.py: 5 warnings
+tests/integration/test_graph_execution.py: 13 warnings
+tests/unit/test_agents.py: 2 warnings
+  /Users/mai/ai-agent-maker/ai-agent-maker-demo/src/agents/qa.py:110: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    "auto_validation": auto_validation.dict(),
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 79 passed, 56 warnings in 2.58s ========================
