@@ -101,11 +101,21 @@ def test_workflow_state_tracking(mock_env, due_diligence_blueprint):
 
 def test_workflow_error_handling(mock_env):
     """Test workflow execution with errors."""
-    # Create minimal workflow
+    from src.core.schemas import Step, AgentRole
+
+    # Create minimal workflow with at least one step
     workflow = Workflow(
         name="error_test",
         description="Test error handling",
-        steps=[],  # Empty steps might cause issues
+        steps=[
+            Step(
+                name="test_step",
+                agent_role=AgentRole.RESEARCHER,
+                output_key="output",
+                prompt_template="Test",
+                validation_rules={}
+            )
+        ],
         input_data={}
     )
 

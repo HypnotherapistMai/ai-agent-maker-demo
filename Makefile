@@ -1,10 +1,10 @@
 .PHONY: dev test lint type-check docs clean
 
 dev:
-	streamlit run ui/app.py
+	PYTHONPATH=. streamlit run ui/app.py
 
 test:
-	pytest --cov=src --cov-report=term --cov-report=html
+	PYTHONPATH=. pytest --cov=src --cov-report=term --cov-report=html
 
 lint:
 	ruff check src tests

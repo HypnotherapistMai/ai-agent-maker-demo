@@ -1,7 +1,7 @@
 """LangGraph builder: constructs dynamic execution graphs."""
 from langgraph.graph import StateGraph, START, END  # ⭐ Correct imports
 from langgraph.checkpoint.memory import MemorySaver
-from typing import Literal, Any
+from typing import Literal, Any, Dict
 import time
 import uuid
 from datetime import datetime
@@ -15,7 +15,7 @@ from src.utils.logging import setup_logger
 logger = setup_logger(__name__)
 
 
-def manager_node(state: AgentState) -> AgentState:
+def manager_node(state: AgentState) -> Dict[str, Any]:
     """
     Manager decision node.
 
@@ -23,7 +23,7 @@ def manager_node(state: AgentState) -> AgentState:
         state: Current state
 
     Returns:
-        Updated state with manager decisions
+        Partial state update with manager decisions
     """
     logger.info("Executing manager node")
     agent = ManagerAgent()
@@ -31,23 +31,23 @@ def manager_node(state: AgentState) -> AgentState:
     try:
         result = agent.process(state)
 
-        # Update state
+        # Modify agent_outputs in-place to avoid INVALID_CONCURRENT_GRAPH_UPDATE
         if "agent_outputs" not in state:
             state["agent_outputs"] = {}
-
         state["agent_outputs"]["manager"] = result
-        state["current_step"] = state.get("current_step", 0) + 1
+
+        return {
+            "current_step": state.get("current_step", 0) + 1
+        }
 
     except Exception as e:
         logger.error(f"Manager node error: {e}")
-        if "errors" not in state:
-            state["errors"] = []
-        state["errors"].append({"node": "manager", "error": str(e)})
-
-    return state
+        return {
+            "errors": [{"node": "manager", "error": str(e)}]
+        }
 
 
-def researcher_node(state: AgentState) -> AgentState:
+def researcher_node(state: AgentState) -> Dict[str, Any]:
     """
     Researcher node.
 
@@ -55,7 +55,7 @@ def researcher_node(state: AgentState) -> AgentState:
         state: Current state
 
     Returns:
-        Updated state with research findings
+        Partial state update with research findings
     """
     logger.info("Executing researcher node")
     agent = ResearcherAgent()
@@ -63,26 +63,24 @@ def researcher_node(state: AgentState) -> AgentState:
     try:
         result = agent.process(state)
 
-        # Update state
-        state["researcher_findings"] = result.get("findings")
-
+        # Modify agent_outputs in-place to avoid INVALID_CONCURRENT_GRAPH_UPDATE
         if "agent_outputs" not in state:
             state["agent_outputs"] = {}
-
         state["agent_outputs"]["researcher"] = result
+
+        return {
+            "researcher_findings": result.get("findings")
+        }
 
     except Exception as e:
         logger.error(f"Researcher node error: {e}")
-        if "errors" not in state:
-            state["errors"] = []
-        state["errors"].append({"node": "researcher", "error": str(e)})
-        # Provide fallback
-        state["researcher_findings"] = "Error in research, using fallback data"
-
-    return state
+        return {
+            "errors": [{"node": "researcher", "error": str(e)}],
+            "researcher_findings": "Error in research, using fallback data"
+        }
 
 
-def writer_node(state: AgentState) -> AgentState:
+def writer_node(state: AgentState) -> Dict[str, Any]:
     """
     Writer node.
 
@@ -90,7 +88,7 @@ def writer_node(state: AgentState) -> AgentState:
         state: Current state
 
     Returns:
-        Updated state with written draft
+        Partial state update with written draft
     """
     logger.info(f"Executing writer node (retry: {state.get('retry_count', 0)})")
     agent = WriterAgent()
@@ -102,26 +100,24 @@ def writer_node(state: AgentState) -> AgentState:
 
         result = agent.process(state, custom_prompt=adjusted_prompt)
 
-        # Update state
-        state["writer_draft"] = result.get("draft")
-
+        # Modify agent_outputs in-place to avoid INVALID_CONCURRENT_GRAPH_UPDATE
         if "agent_outputs" not in state:
             state["agent_outputs"] = {}
-
         state["agent_outputs"]["writer"] = result
+
+        return {
+            "writer_draft": result.get("draft")
+        }
 
     except Exception as e:
         logger.error(f"Writer node error: {e}")
-        if "errors" not in state:
-            state["errors"] = []
-        state["errors"].append({"node": "writer", "error": str(e)})
-        # Provide fallback
-        state["writer_draft"] = "Error in writing, using fallback content"
-
-    return state
+        return {
+            "errors": [{"node": "writer", "error": str(e)}],
+            "writer_draft": "Error in writing, using fallback content"
+        }
 
 
-def qa_node(state: AgentState) -> AgentState:
+def qa_node(state: AgentState) -> Dict[str, Any]:
     """
     QA validation node.
 
@@ -129,7 +125,7 @@ def qa_node(state: AgentState) -> AgentState:
         state: Current state
 
     Returns:
-        Updated state with validation results
+        Partial state update with validation results
     """
     logger.info("Executing QA node")
     agent = QAAgent()
@@ -137,37 +133,37 @@ def qa_node(state: AgentState) -> AgentState:
     try:
         result = agent.process(state)
 
-        # Update state
-        state["validation_passed"] = result.get("passed", False)
-        state["validation_feedback"] = result.get("feedback")
-
+        # Modify agent_outputs in-place to avoid INVALID_CONCURRENT_GRAPH_UPDATE
         if "agent_outputs" not in state:
             state["agent_outputs"] = {}
-
         state["agent_outputs"]["qa"] = result
 
-        if result.get("passed"):
-            state["final_output"] = state.get("writer_draft")
-            state["status"] = "completed"
+        passed = result.get("passed", False)
+        updates = {
+            "validation_passed": passed,
+            "validation_feedback": result.get("feedback")
+        }
+
+        if passed:
+            updates["final_output"] = state.get("writer_draft")
+            updates["status"] = "completed"
             logger.info("✅ Validation passed")
         else:
-            if "retry_count" not in state:
-                state["retry_count"] = 0
-            state["retry_count"] += 1
-            state["status"] = "retrying" if state["retry_count"] < 2 else "failed"
-            logger.warning(f"❌ Validation failed (retry {state['retry_count']}/2)")
+            retry_count = state.get("retry_count", 0) + 1
+            updates["retry_count"] = retry_count
+            updates["status"] = "retrying" if retry_count < 2 else "failed"
+            logger.warning(f"❌ Validation failed (retry {retry_count}/2)")
+
+        return updates
 
     except Exception as e:
         logger.error(f"QA node error: {e}")
-        if "errors" not in state:
-            state["errors"] = []
-        state["errors"].append({"node": "qa", "error": str(e)})
-        # Fail gracefully
-        state["validation_passed"] = False
-        state["validation_feedback"] = f"QA error: {e}"
-        state["status"] = "failed"
-
-    return state
+        return {
+            "errors": [{"node": "qa", "error": str(e)}],
+            "validation_passed": False,
+            "validation_feedback": f"QA error: {e}",
+            "status": "failed"
+        }
 
 
 def qa_decision(state: AgentState) -> Literal["done", "rewrite"]:
@@ -220,8 +216,7 @@ def build_graph(workflow: Workflow) -> Any:
     # Define edges
     graph.add_edge(START, "manager")  # ⭐ Use START
     graph.add_edge("manager", "researcher")
-    graph.add_edge("researcher", "manager")
-    graph.add_edge("manager", "writer")
+    graph.add_edge("researcher", "writer")  # Direct path, no second manager call
 
     # ⭐ Conditional edge: QA decides pass or retry
     graph.add_conditional_edges(
@@ -298,8 +293,11 @@ def execute_workflow(
     memory_manager = MemoryManager()
 
     try:
-        # Run graph
-        config = {"configurable": {"thread_id": initial_state["execution_id"]}}
+        # Run graph with increased recursion limit for retry loops
+        config = {
+            "configurable": {"thread_id": initial_state["execution_id"]},
+            "recursion_limit": 50  # Allow for retries and complex workflows
+        }
         result = app.invoke(initial_state, config=config)
 
         duration = time.time() - start_time
