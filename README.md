@@ -351,8 +351,8 @@ This is a demo project for the AI Agent Developer position. However, feedback is
 
 ## 📧 Contact
 
-**Wei-Ting (Mai)** - [mai@example.com](mailto:mai@example.com)
-**LinkedIn**: [linkedin.com/in/mai](https://linkedin.com/in/mai)
+**Wei-Ting ** - [	weiting.kellykao@gmail.com](mailto:	weiting.kellykao@gmail.com)
+**LinkedIn**: [linkedin.com/in/weitingkao/](https://linkedin.com/in/weitingkao/)
 **GitHub**: [github.com/HypnotherapistMai](https://github.com/HypnotherapistMai)
 
 ---
