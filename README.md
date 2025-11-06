@@ -1,5 +1,8 @@
 # 🤖 AI Agent Maker Demo
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Click_Here-success?style=for-the-badge)](https://ai-agent-maker-demo-weitingkao-senior-ai-agent-developer.streamlit.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/HypnotherapistMai/ai-agent-maker-demo)
+
 > A production-ready blueprint-to-agent system showcasing mini agent maker capabilities
 
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
@@ -12,22 +15,30 @@ This demo was built for the **AI Agent Developer** position, showcasing the abil
 
 **Key Innovation**: Not just using agents, but building a system that *generates* agent systems dynamically from blueprints.
 
+**Live Demo Available**: Experience the system in action at [https://ai-agent-maker-demo-weitingkao-senior-ai-agent-developer.streamlit.app/](https://ai-agent-maker-demo-weitingkao-senior-ai-agent-developer.streamlit.app/)
+
 ---
 
 ## ⚡ 10-Second Quick Start
 
-**Local Development**:
+**Try it now**: [https://ai-agent-maker-demo-weitingkao-senior-ai-agent-developer.streamlit.app/](https://ai-agent-maker-demo-weitingkao-senior-ai-agent-developer.streamlit.app/)
+
+1. Click the link above
+2. Select a scenario (Due Diligence or Recruiting)
+3. Click "Load Example"
+4. Hit "Execute Workflow" 🚀
+5. Watch the multi-agent system in action
+
+**Or run locally**:
 ```bash
 git clone https://github.com/HypnotherapistMai/ai-agent-maker-demo.git
 cd ai-agent-maker-demo
 python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
-# Add your OPENAI_API_KEY to .env
+# Add your OPENAI_API_KEY to .env (or use MOCK=1 for testing)
 streamlit run ui/app.py
 ```
-
-**Or try the live demo**: [Coming Soon - Streamlit Cloud]
 
 ---
 
