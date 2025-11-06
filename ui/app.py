@@ -37,6 +37,43 @@ st.markdown("**Transform workflow descriptions into executing multi-agent system
 adk_status = "✅ Google ADK Enabled" if ADK_AVAILABLE else "⚠️ Mock Mode"
 st.sidebar.info(f"**ADK Status**: {adk_status}")
 
+# Mock Mode Professional Explanation
+st.sidebar.divider()
+st.sidebar.markdown("### 🎯 Demo Configuration")
+st.sidebar.info("""
+**Current Mode: Mock Data**
+
+This deployment uses mock responses for:
+
+✅ Cost efficiency (no API charges)
+✅ Demo stability (consistent results)
+✅ Instant response (no API latency)
+
+**Production-Ready Features:**
+- Real OpenAI API integration (configurable)
+- Dynamic company name extraction
+- Custom workflow support
+- All validation and meta-learning active
+
+*For custom workflows with real AI, the system is ready—just add OPENAI_API_KEY to environment.*
+""")
+
+# Optional: Add a callout for technical recruiters
+with st.sidebar.expander("💡 For Technical Reviewers"):
+    st.markdown("""
+**Testing Custom Workflows:**
+
+The mock mode returns predetermined responses that showcase:
+- Blueprint parsing logic
+- Multi-agent orchestration
+- QA validation and retry loops
+- Meta-learning mechanisms
+
+**To Test Real API:**
+1. Local: `OPENAI_API_KEY=your_key make dev`
+2. Questions about production config? Happy to discuss!
+""")
+
 # Sidebar - Input
 st.sidebar.header("📝 Input Blueprint")
 

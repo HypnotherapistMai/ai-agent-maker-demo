@@ -151,6 +151,46 @@ graph TD
 
 ---
 
+## 🎛️ Demo Configuration
+
+### Current Deployment: Mock Mode
+
+The live demo uses mock responses for demonstration purposes, providing:
+
+✅ **Cost-free testing** for recruiters and users
+✅ **Consistent, reliable results** for showcase
+✅ **Fast response times** without API dependencies
+
+### Production Capabilities
+
+The system is **fully production-ready** with real OpenAI API integration:
+
+- ✅ Dynamic response generation based on actual prompts
+- ✅ Company name extraction and personalization
+- ✅ Custom workflow support (any valid blueprint)
+- ✅ All meta-learning and validation features active
+
+### Local Testing with Real API
+
+```bash
+# Set your OpenAI API key
+export OPENAI_API_KEY=sk-your-key-here
+export MOCK=0
+
+# Run with real AI
+make dev
+```
+
+*The mock/real toggle is environment-based, making it production-deployment ready.*
+
+**Why Mock for Demo?**
+- Eliminates API costs for public demos
+- Provides stable, deterministic results for showcasing
+- Demonstrates system architecture without requiring API keys
+- Production code path remains identical (same validation, orchestration, meta-learning)
+
+---
+
 ## 🚀 Usage
 
 ### Streamlit UI
