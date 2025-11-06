@@ -36,3 +36,6 @@ Thumbs.db
 
 # Streamlit
 .streamlit/secrets.toml
+REAL_API_TEST_REPORT.md
+test_real_api.py
+execution_history.db
